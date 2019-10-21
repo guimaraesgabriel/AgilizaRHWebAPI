@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AgilizaRH.Models
 {
@@ -11,6 +12,7 @@ namespace AgilizaRH.Models
         [MaxLength(255)]
         public string Nome { get; set; }
 
+        [Column(TypeName = "decimal(18,2)")]
         public decimal Salario { get; set; }
 
         public bool Ativo{ get; set; }

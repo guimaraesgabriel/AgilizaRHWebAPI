@@ -19,6 +19,7 @@ namespace AgilizaRH.Controllers
             _context = context;
         }
 
+        #region CRUD
         // GET: api/Cargos
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Cargos>>> GetCargos()
@@ -108,5 +109,6 @@ namespace AgilizaRH.Controllers
         {
             return _context.Cargos.Any(e => e.Id == id);
         }
+        #endregion
     }
 }

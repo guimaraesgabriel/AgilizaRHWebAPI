@@ -20,7 +20,7 @@ namespace AgilizaRH
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<AgilizaRHContext>(opt => opt.UseInMemoryDatabase("AgilizaRH"));
+            services.AddDbContext<AgilizaRHContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("AgilizaRHConnection")));
 
             services.AddControllers();
         }

@@ -10,13 +10,13 @@ namespace AgilizaRH.Models
 
 
         //FK
-        public int CargoIdAnterior { get; set; }
+        public int? CargoIdAnterior { get; set; }
 
         [ForeignKey("CargoIdAnterior")]
         public virtual Cargos CargoAnterior { get; set; }
 
 
-        public int CargoIdNovo { get; set; }
+        public int? CargoIdNovo { get; set; }
 
         [ForeignKey("CargoIdNovo")]
         public virtual Cargos CargoNovo { get; set; }
