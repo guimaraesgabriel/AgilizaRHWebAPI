@@ -5,57 +5,53 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using AgilizaRH.Context;
 using AgilizaRH.Models;
-using AgilizaRH.Helper;
 
 namespace AgilizaRH.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CargosController : ControllerBase
+    public class UsuariosController : ControllerBase
     {
         private readonly AgilizaRHContext _context;
 
-        Tools tool = new Tools();
-
-        public CargosController(AgilizaRHContext context)
+        public UsuariosController(AgilizaRHContext context)
         {
             _context = context;
         }
 
-        #region CRUD
-        // GET: api/Cargos
+        // GET: api/Usuarios
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Cargos>>> GetCargos()
+        public async Task<ActionResult<IEnumerable<Usuarios>>> GetUsuarios()
         {
-            return await _context.Cargos.ToListAsync();
+            return await _context.Usuarios.ToListAsync();
         }
 
-        // GET: api/Cargos/5
+        // GET: api/Usuarios/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Cargos>> GetCargos(int id)
+        public async Task<ActionResult<Usuarios>> GetUsuarios(int id)
         {
-            var cargos = await _context.Cargos.FindAsync(id);
+            var usuarios = await _context.Usuarios.FindAsync(id);
 
-            if (cargos == null)
+            if (usuarios == null)
             {
                 return NotFound();
             }
 
-            return cargos;
+            return usuarios;
         }
 
-        // PUT: api/Cargos/5
+        // PUT: api/Usuarios/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCargos(int id, Cargos cargos)
+        public async Task<IActionResult> PutUsuarios(int id, Usuarios usuarios)
         {
-            if (id != cargos.Id)
+            if (id != usuarios.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(cargos).State = EntityState.Modified;
+            _context.Entry(usuarios).State = EntityState.Modified;
 
             try
             {
@@ -63,7 +59,7 @@ namespace AgilizaRH.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!CargosExists(id))
+                if (!UsuariosExists(id))
                 {
                     return NotFound();
                 }
@@ -76,42 +72,42 @@ namespace AgilizaRH.Controllers
             return NoContent();
         }
 
-        // POST: api/Cargos
+        // POST: api/Usuarios
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPost]
-        public async Task<ActionResult<Cargos>> PostCargos(Cargos cargos)
+        public async Task<ActionResult<Usuarios>> PostUsuarios(Usuarios usuarios)
         {
-            _context.Cargos.Add(cargos);
+            _context.Usuarios.Add(usuarios);
             await _context.SaveChangesAsync();
 
-            //return CreatedAtAction("GetCargos", new { id = cargos.Id }, cargos);
-            return CreatedAtAction(nameof(GetCargos), new { id = cargos.Id }, cargos);
+            //return CreatedAtAction("GetUsuarios", new { id = usuarios.Id }, usuarios);
+            return CreatedAtAction(nameof(GetUsuarios), new { id = usuarios.Id }, usuarios);
         }
 
-        // DELETE: api/Cargos/5
+        // DELETE: api/Usuarios/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Cargos>> DeleteCargos(int id)
+        public async Task<ActionResult<Usuarios>> DeleteUsuarios(int id)
         {
-            var cargos = await _context.Cargos.FindAsync(id);
-            if (cargos == null)
+            var usuarios = await _context.Usuarios.FindAsync(id);
+
+            if (usuarios == null)
             {
                 return NotFound();
             }
 
-            //_context.Cargos.Remove(cargos);
+            //_context.Usuarios.Remove(usuarios);
 
-            cargos.Ativo = !cargos.Ativo;
+            usuarios.Ativo = !usuarios.Ativo;
 
             await _context.SaveChangesAsync();
 
-            return cargos;
+            return usuarios;
         }
 
-        private bool CargosExists(int id)
+        private bool UsuariosExists(int id)
         {
-            return _context.Cargos.Any(e => e.Id == id);
+            return _context.Usuarios.Any(e => e.Id == id);
         }
-        #endregion
     }
 }

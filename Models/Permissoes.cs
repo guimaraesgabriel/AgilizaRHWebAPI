@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AgilizaRH.Models
@@ -25,5 +26,7 @@ namespace AgilizaRH.Models
 
 
         //Collections
+        public ICollection<GruposUsuarios> GruposUsuarios { get; set; }
+
     }
 }

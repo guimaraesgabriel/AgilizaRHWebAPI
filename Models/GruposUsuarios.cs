@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace AgilizaRH.Models
 {
-    public class GruposColaboradores
+    public class GruposUsuarios
     {
         [Key]
         public int Id { get; set; }
