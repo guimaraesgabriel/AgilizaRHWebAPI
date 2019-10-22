@@ -15,6 +15,7 @@ namespace AgilizaRH.Models
         [ForeignKey("UsuarioId")]
         public virtual Usuarios Usuarios { get; set; }
 
+
         public int TelefoneId { get; set; }
 
         [ForeignKey("TelefoneId")]

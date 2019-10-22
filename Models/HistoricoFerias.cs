@@ -11,7 +11,7 @@ namespace AgilizaRH.Models
 
         public DateTime DataFerias { get; set; }
 
-        public DateTime PrevisaoFerias { get; set; }
+        public DateTime? PrevisaoFerias { get; set; }
 
 
         //FK

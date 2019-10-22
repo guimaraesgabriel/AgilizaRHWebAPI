@@ -15,10 +15,12 @@ namespace AgilizaRH.Models
         [ForeignKey("CargoId")]
         public virtual Cargos Cargos { get; set; }
 
+
         public int GratificacaoId { get; set; }
 
         [ForeignKey("GratificacaoId")]
         public virtual Gratificacoes Gratificacoes { get; set; }
+
 
         //Collections
     }

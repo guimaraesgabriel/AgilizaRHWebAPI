@@ -34,12 +34,12 @@ namespace AgilizaRH.Models
         public int GrupoId { get; set; }
 
         [ForeignKey("GrupoId")]
-        public virtual GruposColaboradores GruposColaboradores { get; set; }
+        public virtual GruposUsuarios GruposUsuarios { get; set; }
 
 
-        public int CargoIdNovo { get; set; }
+        public int CargoId { get; set; }
 
-        [ForeignKey("CargoIdNovo")]
+        [ForeignKey("CargoId")]
         public virtual Cargos Cargos { get; set; }
 
 

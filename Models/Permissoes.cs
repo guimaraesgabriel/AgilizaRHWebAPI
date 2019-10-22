@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AgilizaRH.Models
@@ -24,13 +23,13 @@ namespace AgilizaRH.Models
         [ForeignKey("TelaId")]
         public virtual Telas Telas { get; set; }
 
+
         public int GrupoId { get; set; }
 
         [ForeignKey("GrupoId")]
-        public virtual GruposColaboradores GruposColaboradores { get; set; }
+        public virtual GruposUsuarios GruposUsuarios { get; set; }
+
 
         //Collections
-        public ICollection<GruposColaboradores> GruposUsuarios { get; set; }
-
     }
 }

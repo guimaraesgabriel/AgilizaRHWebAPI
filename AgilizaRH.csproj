@@ -17,6 +17,20 @@
     <Compile Remove="Migrations\20191022010646_verify2.Designer.cs" />
     <Compile Remove="Migrations\20191022010754_alter-name_gruposcolaboradores-gruposuarios.cs" />
     <Compile Remove="Migrations\20191022010754_alter-name_gruposcolaboradores-gruposuarios.Designer.cs" />
+    <Compile Remove="Migrations\20191022182610_bla.cs" />
+    <Compile Remove="Migrations\20191022182610_bla.Designer.cs" />
+    <Compile Remove="Migrations\20191022183345_alter-table-name.cs" />
+    <Compile Remove="Migrations\20191022183345_alter-table-name.Designer.cs" />
+    <Compile Remove="Migrations\20191022184216_alter-table-name.cs" />
+    <Compile Remove="Migrations\20191022184216_alter-table-name.Designer.cs" />
+    <Compile Remove="Migrations\20191022184512_alter-table-name.cs" />
+    <Compile Remove="Migrations\20191022184512_alter-table-name.Designer.cs" />
+    <Compile Remove="Migrations\20191022190048_alter-table-name.cs" />
+    <Compile Remove="Migrations\20191022190048_alter-table-name.Designer.cs" />
+    <Compile Remove="Migrations\20191022190508_primeiro-migration-bd-250.cs" />
+    <Compile Remove="Migrations\20191022190508_primeiro-migration-bd-250.Designer.cs" />
+    <Compile Remove="Migrations\20191022192906_teste.cs" />
+    <Compile Remove="Migrations\20191022192906_teste.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

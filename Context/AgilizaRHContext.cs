@@ -1,5 +1,6 @@
 ﻿using AgilizaRH.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace AgilizaRH.Context
 {
@@ -13,10 +14,20 @@ namespace AgilizaRH.Context
         {
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            foreach (var foreignKey in modelBuilder.Model.GetEntityTypes().SelectMany(a => a.GetForeignKeys()))
+            {
+                foreignKey.DeleteBehavior = DeleteBehavior.Restrict;
+            }
+        }
+
         public DbSet<CargoGratificacoes> CargoGratificacoes { get; set; }
         public DbSet<Cargos> Cargos { get; set; }
         public DbSet<Gratificacoes> Gratificacoes { get; set; }
-        public DbSet<GruposColaboradores> GruposColaboradores { get; set; }
+        public DbSet<GruposUsuarios> GruposUsuarios { get; set; }
         public DbSet<HistoricoFerias> HistoricoFerias { get; set; }
         public DbSet<HistoricoPromocoes> HistoricoPromocoes { get; set; }
         public DbSet<Log> Log { get; set; }

@@ -15,7 +15,7 @@ namespace AgilizaRH.Models
         [Column(TypeName = "decimal(18,2)")]
         public decimal Salario { get; set; }
 
-        public bool Ativo{ get; set; }
+        public bool Ativo { get; set; }
 
 
         //FK

@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AgilizaRH.Models
 {
-    public class GruposColaboradores
+    public class GruposUsuarios
     {
         [Key]
         public int Id { get; set; }
@@ -14,7 +13,13 @@ namespace AgilizaRH.Models
 
         public bool Ativo { get; set; }
 
+
+        //FK
+
+
+
         //Collections
+        public ICollection<Permissoes> Permissoes { get; set; }
         public ICollection<Usuarios> Usuarios { get; set; }
     }
 }
