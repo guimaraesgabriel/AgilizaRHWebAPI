@@ -24,6 +24,10 @@ namespace AgilizaRH.Models
         [ForeignKey("TelaId")]
         public virtual Telas Telas { get; set; }
 
+        public int GrupoId { get; set; }
+
+        [ForeignKey("GrupoId")]
+        public virtual GruposColaboradores GruposColaboradores { get; set; }
 
         //Collections
         public ICollection<GruposColaboradores> GruposUsuarios { get; set; }

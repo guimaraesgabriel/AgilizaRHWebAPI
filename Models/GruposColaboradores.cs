@@ -14,14 +14,6 @@ namespace AgilizaRH.Models
 
         public bool Ativo { get; set; }
 
-
-        //FK
-        public int? PermissaoId { get; set; }
-
-        [ForeignKey("PermissaoId")]
-        public virtual Permissoes Permissoes { get; set; }
-
-
         //Collections
         public ICollection<Usuarios> Usuarios { get; set; }
     }
