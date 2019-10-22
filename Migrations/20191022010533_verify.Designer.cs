@@ -4,14 +4,16 @@ using AgilizaRH.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AgilizaRH.Migrations
 {
     [DbContext(typeof(AgilizaRHContext))]
-    partial class AgilizaRHContextModelSnapshot : ModelSnapshot
+    [Migration("20191022010533_verify")]
+    partial class verify
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -88,7 +90,7 @@ namespace AgilizaRH.Migrations
                     b.ToTable("Gratificacoes");
                 });
 
-            modelBuilder.Entity("AgilizaRH.Models.GruposUsuarios", b =>
+            modelBuilder.Entity("AgilizaRH.Models.GruposColaboradores", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -349,7 +351,7 @@ namespace AgilizaRH.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("AgilizaRH.Models.GruposUsuarios", b =>
+            modelBuilder.Entity("AgilizaRH.Models.GruposColaboradores", b =>
                 {
                     b.HasOne("AgilizaRH.Models.Permissoes", "Permissoes")
                         .WithMany("GruposUsuarios")
@@ -429,7 +431,7 @@ namespace AgilizaRH.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("AgilizaRH.Models.GruposUsuarios", "GruposColaboradores")
+                    b.HasOne("AgilizaRH.Models.GruposColaboradores", "GruposColaboradores")
                         .WithMany("Usuarios")
                         .HasForeignKey("GrupoId")
                         .OnDelete(DeleteBehavior.Cascade)

@@ -4,14 +4,16 @@ using AgilizaRH.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AgilizaRH.Migrations
 {
     [DbContext(typeof(AgilizaRHContext))]
-    partial class AgilizaRHContextModelSnapshot : ModelSnapshot
+    [Migration("20191022010846_alter-name_gruposcolaboradores-gruposuarios")]
+    partial class altername_gruposcolaboradoresgruposuarios
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -105,9 +107,12 @@ namespace AgilizaRH.Migrations
                     b.Property<int?>("PermissaoId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("PermissoesId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("PermissaoId");
+                    b.HasIndex("PermissoesId");
 
                     b.ToTable("GruposColaboradores");
                 });
@@ -353,7 +358,7 @@ namespace AgilizaRH.Migrations
                 {
                     b.HasOne("AgilizaRH.Models.Permissoes", "Permissoes")
                         .WithMany("GruposUsuarios")
-                        .HasForeignKey("PermissaoId");
+                        .HasForeignKey("PermissoesId");
                 });
 
             modelBuilder.Entity("AgilizaRH.Models.HistoricoFerias", b =>

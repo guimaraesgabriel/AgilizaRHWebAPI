@@ -4,14 +4,16 @@ using AgilizaRH.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AgilizaRH.Migrations
 {
     [DbContext(typeof(AgilizaRHContext))]
-    partial class AgilizaRHContextModelSnapshot : ModelSnapshot
+    [Migration("20191022011033_alter-name_gruposcolaboradores-gruposusuarios")]
+    partial class altername_gruposcolaboradoresgruposusuarios
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

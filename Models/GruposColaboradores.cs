@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AgilizaRH.Models
 {
-    public class GruposUsuarios
+    public class GruposColaboradores
     {
         [Key]
         public int Id { get; set; }
@@ -15,8 +16,9 @@ namespace AgilizaRH.Models
 
 
         //FK
-        public int PermissaoId { get; set; }
+        public int? PermissaoId { get; set; }
 
+        [ForeignKey("PermissaoId")]
         public virtual Permissoes Permissoes { get; set; }
 
 

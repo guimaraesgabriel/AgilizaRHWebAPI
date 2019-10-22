@@ -26,7 +26,7 @@ namespace AgilizaRH.Models
 
 
         //Collections
-        public ICollection<GruposUsuarios> GruposUsuarios { get; set; }
+        public ICollection<GruposColaboradores> GruposUsuarios { get; set; }
 
     }
 }

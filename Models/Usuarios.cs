@@ -25,6 +25,8 @@ namespace AgilizaRH.Models
 
         public DateTime? DataSaida { get; set; }
 
+        public bool Logado { get; set; }
+
         public bool Ativo { get; set; }
 
 
@@ -32,7 +34,7 @@ namespace AgilizaRH.Models
         public int GrupoId { get; set; }
 
         [ForeignKey("GrupoId")]
-        public virtual GruposUsuarios GruposColaboradores { get; set; }
+        public virtual GruposColaboradores GruposColaboradores { get; set; }
 
 
         public int CargoIdNovo { get; set; }

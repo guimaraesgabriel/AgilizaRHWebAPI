@@ -5,6 +5,25 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20191022005601_teste.cs" />
+    <Compile Remove="Migrations\20191022005601_teste.Designer.cs" />
+    <Compile Remove="Migrations\20191022005636_teste.cs" />
+    <Compile Remove="Migrations\20191022005636_teste.Designer.cs" />
+    <Compile Remove="Migrations\20191022005844_verify.cs" />
+    <Compile Remove="Migrations\20191022005844_verify.Designer.cs" />
+    <Compile Remove="Migrations\20191022010253_verify.cs" />
+    <Compile Remove="Migrations\20191022010253_verify.Designer.cs" />
+    <Compile Remove="Migrations\20191022010646_verify2.cs" />
+    <Compile Remove="Migrations\20191022010646_verify2.Designer.cs" />
+    <Compile Remove="Migrations\20191022010754_alter-name_gruposcolaboradores-gruposuarios.cs" />
+    <Compile Remove="Migrations\20191022010754_alter-name_gruposcolaboradores-gruposuarios.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="3.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.0.0">
