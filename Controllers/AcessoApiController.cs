@@ -42,7 +42,7 @@ namespace AgilizaRH.Controllers
             var token = new JwtSecurityToken
                 (
                     claims: new[] { new Claim(ClaimTypes.Name, user.Id.ToString()) },
-                    expires: DateTime.Now.AddYears(10),
+                    expires: DateTime.Now.AddYears(9999),
                     signingCredentials: new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256)
                 );
             return Ok(new
