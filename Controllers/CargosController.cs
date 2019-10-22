@@ -6,9 +6,11 @@ using Microsoft.EntityFrameworkCore;
 using AgilizaRH.Context;
 using AgilizaRH.Models;
 using AgilizaRH.Helper;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AgilizaRH.Controllers
 {
+    [Authorize()]
     [Route("api/[controller]")]
     [ApiController]
     public class CargosController : ControllerBase
