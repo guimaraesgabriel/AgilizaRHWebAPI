@@ -1,2 +1,2 @@
 # AgilizaRH
- Sistema de Gestão de RH
+ Sistema de Gestão de RH - Web API
