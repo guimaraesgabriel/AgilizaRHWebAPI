@@ -33,7 +33,6 @@ namespace AgilizaRH.Context
         public DbSet<Log> Log { get; set; }
         public DbSet<Permissoes> Permissoes { get; set; }
         public DbSet<Telas> Telas { get; set; }
-        public DbSet<Telefones> Telefones { get; set; }
         public DbSet<Usuarios> Usuarios { get; set; }
         public DbSet<UsuarioTelefones> UsuarioTelefones { get; set; }
     }

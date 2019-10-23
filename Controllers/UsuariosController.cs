@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using AgilizaRH.Context;
 using AgilizaRH.Models;
+using AgilizaRH.Helper;
 
 namespace AgilizaRH.Controllers
 {
@@ -13,6 +14,7 @@ namespace AgilizaRH.Controllers
     public class UsuariosController : ControllerBase
     {
         private readonly AgilizaRHContext _context;
+        Tools tool = new Tools();
 
         public UsuariosController(AgilizaRHContext context)
         {
@@ -44,7 +46,7 @@ namespace AgilizaRH.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutUsuarios(int id, Usuarios usuarios)
+        public async Task<IActionResult> PutUsuarios(int id, Usuarios usuarios, int usuarioId)
         {
             if (id != usuarios.Id)
             {
@@ -56,6 +58,8 @@ namespace AgilizaRH.Controllers
             try
             {
                 await _context.SaveChangesAsync();
+
+                tool.MontaLog(5, "Usuário Id: " + usuarios.Id + " Nome: " + usuarios.Nome + " editado com sucesso.", usuarioId, "EDITAR");
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -76,10 +80,12 @@ namespace AgilizaRH.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPost]
-        public async Task<ActionResult<Usuarios>> PostUsuarios(Usuarios usuarios)
+        public async Task<ActionResult<Usuarios>> PostUsuarios(Usuarios usuarios, int usuarioId)
         {
             _context.Usuarios.Add(usuarios);
             await _context.SaveChangesAsync();
+
+            tool.MontaLog(5, "Usuário Id: " + usuarios.Id + " Nome: " + usuarios.Nome + " adicionado com sucesso.", usuarioId, "ADICIONAR");
 
             //return CreatedAtAction("GetUsuarios", new { id = usuarios.Id }, usuarios);
             return CreatedAtAction(nameof(GetUsuarios), new { id = usuarios.Id }, usuarios);
@@ -87,7 +93,7 @@ namespace AgilizaRH.Controllers
 
         // DELETE: api/Usuarios/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Usuarios>> DeleteUsuarios(int id)
+        public async Task<ActionResult<Usuarios>> DeleteUsuarios(int id, int usuarioId)
         {
             var usuarios = await _context.Usuarios.FindAsync(id);
 
@@ -99,8 +105,16 @@ namespace AgilizaRH.Controllers
             //_context.Usuarios.Remove(usuarios);
 
             usuarios.Ativo = !usuarios.Ativo;
-
             await _context.SaveChangesAsync();
+
+            if (usuarios.Ativo)
+            {
+                tool.MontaLog(5, "Usuário Id: " + usuarios.Id + " Nome: " + usuarios.Nome + " ativado com sucesso.", usuarioId, "ATIVAR/DESATIVAR");
+            }
+            else
+            {
+                tool.MontaLog(5, "Usuário Id: " + usuarios.Id + " Nome: " + usuarios.Nome + " desativado com sucesso.", usuarioId, "ATIVAR/DESATIVAR");
+            }
 
             return usuarios;
         }

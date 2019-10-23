@@ -50,7 +50,7 @@ namespace AgilizaRH.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCargos(int id, Cargos cargos)
+        public async Task<IActionResult> PutCargos(int id, Cargos cargos, int usuarioId)
         {
             if (id != cargos.Id)
             {
@@ -62,6 +62,8 @@ namespace AgilizaRH.Controllers
             try
             {
                 await _context.SaveChangesAsync();
+
+                tool.MontaLog(2, "Cargo Id: " + cargos.Id + " Cargo: " + cargos.Nome + " editado com sucesso.", usuarioId, "EDITAR");
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -82,10 +84,12 @@ namespace AgilizaRH.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPost]
-        public async Task<ActionResult<Cargos>> PostCargos(Cargos cargos)
+        public async Task<ActionResult<Cargos>> PostCargos(Cargos cargos, int usuarioId)
         {
             _context.Cargos.Add(cargos);
             await _context.SaveChangesAsync();
+
+            tool.MontaLog(2, "Cargo Id: " + cargos.Id + " Cargo: " + cargos.Nome + " adicionado com sucesso.", usuarioId, "ADICIONAR");
 
             //return CreatedAtAction("GetCargos", new { id = cargos.Id }, cargos);
             return CreatedAtAction(nameof(GetCargos), new { id = cargos.Id }, cargos);
@@ -93,7 +97,7 @@ namespace AgilizaRH.Controllers
 
         // DELETE: api/Cargos/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Cargos>> DeleteCargos(int id)
+        public async Task<ActionResult<Cargos>> DeleteCargos(int id, int usuarioId)
         {
             var cargos = await _context.Cargos.FindAsync(id);
             if (cargos == null)
@@ -104,8 +108,16 @@ namespace AgilizaRH.Controllers
             //_context.Cargos.Remove(cargos);
 
             cargos.Ativo = !cargos.Ativo;
-
             await _context.SaveChangesAsync();
+
+            if (cargos.Ativo)
+            {
+                tool.MontaLog(2, "Cargo Id: " + cargos.Id + " Cargo: " + cargos.Nome + " ativado com sucesso.", usuarioId, "ATIVAR/DESATIVAR");
+            }
+            else
+            {
+                tool.MontaLog(2, "Cargo Id: " + cargos.Id + " Cargo: " + cargos.Nome + " desativado com sucesso.", usuarioId, "ATIVAR/DESATIVAR");
+            }
 
             return cargos;
         }

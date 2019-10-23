@@ -4,14 +4,16 @@ using AgilizaRH.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AgilizaRH.Migrations
 {
     [DbContext(typeof(AgilizaRHContext))]
-    partial class AgilizaRHContextModelSnapshot : ModelSnapshot
+    [Migration("20191023134908_remove-table-Telefones")]
+    partial class removetableTelefones
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -25,9 +27,6 @@ namespace AgilizaRH.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<bool>("Ativo")
-                        .HasColumnType("bit");
 
                     b.Property<int>("CargoId")
                         .HasColumnType("int");
