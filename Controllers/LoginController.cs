@@ -1,11 +1,16 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
 using AgilizaRH.Context;
 using AgilizaRH.Helper;
+using AgilizaRH.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace AgilizaRH.Controllers
 {
+    [Authorize()]
     [Route("api/[controller]")]
     [ApiController]
     public class LoginController : ControllerBase
@@ -18,70 +23,62 @@ namespace AgilizaRH.Controllers
             _context = context;
         }
 
-        //[HttpPost]
-        //[Route("api/Login/Login/")]
-        //public JsonResult Login(dynamic obj)
-        //{
-        //    string email = obj.email.Value;
-        //    string senha = obj.senha.Value;
+        [HttpPost]
+        public async Task<ActionResult<Usuarios>> Login(Usuarios usuario)
+        {
+            var senha = tool.Criptografar(usuario.Senha);
+            Usuarios user = _context.Usuarios.FirstOrDefault(a => a.Email == usuario.Email && a.Senha == senha);
 
-        //    try
-        //    {
-        //        var senhaCrypt = tool.Criptografar(senha);
+            if (user != null)
+            {
+                user.Logado = true;
+                _context.Entry(user).State = EntityState.Modified;
+                try
+                {
+                    await _context.SaveChangesAsync();
+                    tool.MontaLog(1, "O usuário " + user.Nome + "( " + user.Email + " )" + " logou no sistema", user.Id, "LOGIN");
+                }
+                catch (DbUpdateConcurrencyException ex)
+                {
+                    return BadRequest(new { msg = ex.Message });
+                    throw;
+                }
+            }
+            else
+            {
+                tool.MontaLog(1, "Usuário ou senha incorreta, Login: " + usuario.Email, user.Id, "LOGIN");
+                return NotFound(new { msg = "Login ou senha incorreta!" });
+            }
 
-        //        var usuario = _context.Usuarios.FirstOrDefault(a => a.Email == email && a.Senha == senhaCrypt );
+            return user;
+        }
 
-        //        if (usuario == null)
-        //        {
-        //            tool.MontaLog(1, "ERRO DE AUTENTICAÇÃO - Usuário não encontrado", null, "LOGIN");
+        [HttpGet]
+        public async Task<IActionResult> Logout(int usuarioId)
+        {
+            var user = await _context.Usuarios.FindAsync(usuarioId);
 
-        //            return Json(new { success = false, msg = "Usuário não encontrado" });
-        //        }
-        //        else
-        //        {
-        //            if (usuario.Ativo == false)
-        //            {
-        //                tool.MontaLog(1, "ERRO DE AUTENTICAÇÃO - Usuário inativo", usuario.Id, "LOGIN");
+            if (user != null)
+            {
+                user.Logado = false;
+                _context.Entry(user).State = EntityState.Modified;
+                try
+                {
+                    await _context.SaveChangesAsync();
+                    tool.MontaLog(1, "O usuário " + user.Nome + "( " + user.Email + " )" + " deslogou do sistema", user.Id, "LOGOUT");
+                }
+                catch (DbUpdateConcurrencyException ex)
+                {
+                    return BadRequest(new { msg = ex.Message });
+                    throw;
+                }
+            }
+            else
+            {
+                return NotFound(new { msg = "Usuário não encontrado" });
+            }
 
-        //                return Json(new { success = false, msg = "Usuário inativo" });
-        //            }
-        //            else
-        //            {
-        //                tool.MontaLog(1, "LOGIN REALIZADO COM SUCESSO", usuario.Id, "LOGIN");
-
-        //                return Json(new
-        //                {
-        //                    success = true,
-        //                    usuarioId = usuario.Id,
-        //                    nome = usuario.Nome,
-        //                    data = DateTime.Now.ToString("dd/MM/yyyy")
-        //                });
-        //            }
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        tool.MontaLog(1, "ERRO AO LOGAR", null, "ERRO");
-
-        //        return Json(new { success = false, msg = ex });
-        //    }
-        //}
-
-        //[HttpPost]
-        //[Route("api/Login/Logout/")]
-        //public void Logout(dynamic obj)
-        //{
-        //    int usuarioId = (int)obj.usuarioId.Value;
-        //    var usuario = _context.Usuarios.FirstOrDefault(a => a.Id == usuarioId);
-
-        //    try
-        //    {
-        //        tool.MontaLog(1, "LOGOUT REALIZADO COM SUCESSO", usuario.Id, "LOGOUT");
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        tool.MontaLog(1, "ERRO AO SAIR - " + ex.Message, usuario.Id, "ERRO");
-        //    }
-        //}
+            return NoContent();
+        }
     }
 }
