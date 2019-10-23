@@ -8,6 +8,8 @@ namespace AgilizaRH.Models
         [Key]
         public int Id { get; set; }
 
+        public bool Ativo{ get; set; }
+
 
         //FK
         public int CargoId { get; set; }
